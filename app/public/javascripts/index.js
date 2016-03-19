@@ -22,11 +22,11 @@ var App = function (options) {
 		// vraag 2:
 		questions.push([
 			{
-				img: "open.png",
+				img: "openmind.png", //open.png voor sharon stone
 				keyword: "openminded:true"
 			},
 			{
-				img: "closed.png",
+				img: "closedmind.png", //closed.png voor sharon stone
 				keyword: "openminded:false"
 			}
 		]);
@@ -54,8 +54,27 @@ var App = function (options) {
 			}
 		]);
 
+		questions.push([
+			{
+				img: "rock.png",
+				keyword: "music:gitar"
+			},
+			{
+				img: "DJing.png",
+				keyword: "music:clubbing"
+			}
+		]);
 
-
+		questions.push([
+			{
+				img: "moon.png",
+				keyword: "till:dusk"
+			},
+			{
+				img: "sun.png",
+				keyword: "till:dawn"
+			}
+		]);
 
 
 		// start vragenreeks:

@@ -143,6 +143,7 @@ var profile = {
 };
 
 
+
 function mapProfileToQuery(profile, finalcallback) {
 	console.log(profile);
 	var resultArray = [];
@@ -155,7 +156,11 @@ function mapProfileToQuery(profile, finalcallback) {
 					params.types = 'pharmacy';
 				}
 				getFirstResult(params, function(err, result) {
-					if(!err) resultArray.push(result);
+
+					if(!err) {
+						result.time = "17:00";
+						resultArray.push(result);
+					}
 					callback1(err);
 				});
 
@@ -168,7 +173,11 @@ function mapProfileToQuery(profile, finalcallback) {
 					params.types = 'liquor_store';
 				}
 				getFirstResult(params, function(err, result) {
-					if(!err) resultArray.push(result);
+
+					if(!err) {
+						result.time = "19:00";
+						resultArray.push(result);
+					}
 					callback2(err);
 				});
 			},
@@ -182,7 +191,11 @@ function mapProfileToQuery(profile, finalcallback) {
 					params.keyword = 'pita';
 				}
 				getFirstResult(params, function(err, result) {
-					if(!err) resultArray.push(result);
+					result.type = 'restaurant';
+					if(!err) {
+						result.time = "21:00";
+						resultArray.push(result);
+					}
 				callback3(err);
 
 				});
@@ -196,7 +209,10 @@ function mapProfileToQuery(profile, finalcallback) {
 					params.types = 'bowling_alley';
 				}
 				getFirstResult(params, function(err, result) {
-					if(!err) resultArray.push(result);
+					if(!err) {
+						result.time = "22:00";
+						resultArray.push(result);
+					}
 				callback4(err);
 
 				});
@@ -325,11 +341,11 @@ app.post('/', function (req, res) {
 	if(answers[6] === 'music:clubbing') profile.dance = true; else profile.dance = false;
 	if(answers[7] === 'start:evening' && answers[8] === 'end:morning') profile.nightonly = true; else profile.nightonly = false;
 	profile.nightonly = false;
-	mapProfileToQuery(profile, function(err, res) {
+	mapProfileToQuery(profile, function(err, resu) {
 		console.log('got here');
-		if(err) return resu.json({err: err});
+		if(err) return res.json({err: err});
 
-		results = res;
+		results = resu;
 		res.render('result', { title: 'Apps 4 Ghent 2016!', results: results });
 	});
 });

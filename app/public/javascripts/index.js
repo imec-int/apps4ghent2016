@@ -31,7 +31,7 @@ var App = function (options) {
 			}
 		]);
 
-		// vraag 4:
+		// vraag 3:
 		questions.push([
 			{
 				img: "Food-Vegan.png",
@@ -72,18 +72,12 @@ var App = function (options) {
 			// was laatste vraag, overgaan tot POSTen van data:
 
 			console.log('last question, POSTing');
+			$('.questioncontainer').hide();
+			$('.thx').show();
 
-			$.ajax({
-				url: '/rest/answers',
-				type: 'POST',
-				data: JSON.stringify(answers),
-				contentType: 'application/json; charset=utf-8',
-				dataType: 'json',
-				async: false,
-				success: function (res) {
-					if(res.err) alert(res.err);
-					console.log(res);
-				}
+			sendJSON('/rest/answers', answers, function (res) {
+				if(res.err) alert(res.err);
+				console.log(res);
 			});
 
 			return;
@@ -124,6 +118,18 @@ var App = function (options) {
 
 			showNextQuestion();
 		}
+	};
+
+	var sendJSON = function (url, data, callback) {
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json; charset=utf-8',
+			dataType: 'json',
+			async: false,
+			success: callback
+		});
 	};
 
 	return {

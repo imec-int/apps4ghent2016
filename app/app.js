@@ -185,8 +185,8 @@ app.get('/result', function(req, res) {
 });
 
 
-app.post('/rest/answers', function (req, res) {
-	var answers = req.body;
+app.post('/post/answers', function (req, res) {
+	var answers = JSON.parse(req.body.answersAsJSON);
 
 	console.log('hier zijn de antwoorden matthias, have fun:p', answers);
 

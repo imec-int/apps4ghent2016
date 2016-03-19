@@ -182,8 +182,25 @@ app.get('/', function (req, res) {
 // de antwoorden komen nu hier toe:
 app.post('/', function (req, res) {
 	var answers = JSON.parse(req.body.answersAsJSON);
+	console.log(answers);
 
-	var results = []; //opvullen!!!
+	var results = [
+		{
+			id: 0,
+			time: "17:00",
+			type: "cafe",
+			name: "Geen Resultaten",
+			extra: "Vrijdagmarkt 50",
+			location: {
+				lon: 1.1111,
+				lat: 2.2323424
+			},
+			travelTonext: {
+				time: "12min",
+				distance: "2.8km"
+			}
+		}
+	]; //opvullen!!!
 
 	res.render('result', { title: 'Apps 4 Ghent 2016!', results: results });
 });

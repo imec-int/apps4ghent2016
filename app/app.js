@@ -193,7 +193,7 @@ function mapProfileToQuery(profile, finalcallback) {
 				getFirstResult(params, function(err, result) {
 					result.type = 'restaurant';
 					if(!err) {
-						result.time = "21:00";
+						result.time = "20:00";
 						resultArray.push(result);
 					}
 				callback3(err);
@@ -210,7 +210,7 @@ function mapProfileToQuery(profile, finalcallback) {
 				}
 				getFirstResult(params, function(err, result) {
 					if(!err) {
-						result.time = "22:00";
+						result.time = "23:00";
 						resultArray.push(result);
 					}
 				callback4(err);

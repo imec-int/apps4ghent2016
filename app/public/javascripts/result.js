@@ -1,54 +1,11 @@
 var App = function (options){
 
-	var testData = [
-		{
-			id: 0,
-			time: "17:00",
-			type: "cafe",
-			name: "De Dulle Griet",
-			extra: "Vrijdagmarkt 50",
-			location: {
-				lon: 1.1111,
-				lat: 2.2323424
-			},
-			travelTonext: {
-				time: "12min",
-				distance: "2.8km"
-			}
-		},
-		{
-			id: 1,
-			time: "19:00",
-			type: "restaurant",
-			name: "Pizza Rustica",
-			extra: "Sint-Pietersnieuwstraat 154",
-			location: {
-				lon: 1.1111,
-				lat: 2.2323424
-			},
-			travelTonext: {
-				time: "20min",
-				distance: "4.8km"
-			}
-		},
-		{
-			id: 2,
-			time: "22:00",
-			type: "cafe",
-			name: "Bar des amis",
-			extra: "Vlasmarkt 5",
-			location: {
-				lon: 1.1111,
-				lat: 2.2323424
-			},
-			travelTonext: null
-		}
-	];
 
-	var init = function (){
-		console.log("init Result");
-		$('body').css("background-color", "#459BA9");
-		createTimeline(testData);
+	var init = function (results) {
+
+		console.log("init Result", results);
+
+		createTimeline(results);
 	};
 
 
@@ -86,8 +43,4 @@ var App = function (options){
 
 
 
-$(function(){
-	var app = new App();
-	app.init();
-});
 

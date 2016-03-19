@@ -139,7 +139,7 @@ var App = function (options) {
 			// 	console.log(res);
 			// });
 
-			sendRealPost('/post/answers', {answersAsJSON: JSON.stringify(answers)});
+			sendRealPost('/', {answersAsJSON: JSON.stringify(answers)});
 
 			return;
 		}

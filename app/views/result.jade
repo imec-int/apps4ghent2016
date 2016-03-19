@@ -55,3 +55,11 @@ html
 		script(type='text/javascript', src='/javascripts/result.js')
 
 
+		script.
+			$(function(){
+				var app = new App();
+				app.init(!{JSON.stringify(results)});
+			});
+
+
+

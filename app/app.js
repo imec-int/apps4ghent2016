@@ -41,7 +41,7 @@ var params = {
 };
 
 var profile = {
-	gender: 'm',
+	gender: 'f',
 	orientation: 'f',
 	openmindedness: 5, //0-5
 	fond: 'pita',
@@ -49,10 +49,12 @@ var profile = {
 	bmi: 20,
 	groupsize: 10,
 	budget: 5, //0-5
-	dance: 'y',
+	dance: true,
 	beerprice: 5,
-	openinghour: 11,
-	pharmacy: 'y'
+	nature: 'y',
+	startinghour: 11,
+	nightonly: false,
+	pharmacy: true
 }
 
 
@@ -62,8 +64,25 @@ var profile = {
 // });
 
 function mapProfileToQuery(profile) {
-	console.log(profile);
+	if(!profile.nightonly) {
+		if(profile.gender === 'f') {
+			// params.types = 'beauty_salon'
+			gmAPI.placeSearch(params, function(err, result) {
+				var firstresult = result.results[0];
+				// console.log(JSON.stringify(firstresult));
+				var stop = {
+					name: firstresult.name,
+					address: firstresult.vicinity,
+					location: firstresult.geometry.location
+				}
+				console.log(stop);
+			});
+		}
+	}
+
 }
+
+mapProfileToQuery(profile);
 
 
 app.get('/', function (req, res) {

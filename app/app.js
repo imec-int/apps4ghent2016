@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var googlemaps = require('googlemaps');
 var key = require('./config').key;
+var async = require('async');
 
 var app = express();
 
@@ -106,7 +107,7 @@ var gmAPI = new googlemaps(publicConfig);
 
 var params = {
 	location: "51.054486, 3.725298",
-	radius: 2000,
+	radius: 10000,
 	rankby: 'distance',
 	// keyword: 'pita'
 	types: 'bar'
@@ -116,7 +117,10 @@ function getFirstResult(params, callback) {
 	gmAPI.placeSearch(params, function(err, result) {
 		if(err) return callback(err);
 		var firstresult = result.results[0];
-		// console.log(JSON.stringify(firstresult));
+		console.log('-------');
+		console.log(JSON.stringify(firstresult));
+		console.log('-------');
+
 		var stop = {
 			name: firstresult.name,
 			address: firstresult.vicinity,
@@ -139,85 +143,115 @@ var profile = {
 };
 
 
-function mapProfileToQuery(profile) {
+function mapProfileToQuery(profile, finalcallback) {
+	console.log(profile);
 	var resultArray = [];
-	if(!profile.nightonly) {
-		if(profile.gender === 'f') {
-			params.types = 'beauty_salon';
-		} else {
-			params.types = 'pharmacy';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);
-		});
-		if(profile.openmindedness === false) {
-			params.types = 'church';
-		} else {
-			params.types = 'liquor_store';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);			});
-		if(profile.vegan) {
-			params.types = 'restaurant';
-			params.keyword = 'vegan';
-		} else {
-			params.types = 'restaurant';
-			params.keyword = 'pita';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);
-		});
-		if(profile.dance) {
-			params.types = 'night_club';
-		} else {
-			params.types = 'bowling_alley';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);
-		});
+	// if(!profile.nightonly) {
+		async.waterfall(
+			[function( callback1) {
+				if(profile.gender === 'f') {
+					params.types = 'beauty_salon';
+				} else {
+					params.types = 'pharmacy';
+				}
+				getFirstResult(params, function(err, result) {
+					if(!err) resultArray.push(result);
+					callback1(err);
+				});
+
+			},
+
+			function(callback2) {
+				if(profile.openmindedness === false) {
+					params.types = 'church';
+				} else {
+					params.types = 'liquor_store';
+				}
+				getFirstResult(params, function(err, result) {
+					if(!err) resultArray.push(result);
+					callback2(err);
+				});
+			},
+
+			function( callback3) {
+				if(profile.vegan) {
+					delete(params.types);
+					params.keyword = 'vegan';
+				} else {
+					delete(params.types);
+					params.keyword = 'pita';
+				}
+				getFirstResult(params, function(err, result) {
+					if(!err) resultArray.push(result);
+				callback3(err);
+
+				});
+			},
+
+			function(callback4) {
+				delete(params.keyword);
+				if(profile.dance) {
+					params.types = 'night_club';
+				} else {
+					params.types = 'bowling_alley';
+				}
+				getFirstResult(params, function(err, result) {
+					if(!err) resultArray.push(result);
+				callback4(err);
+
+				});
+			}
+
+			], function(err) {
+				console.log(err);
+				finalcallback(err, resultArray);
+			});
+
 
 		// NIGHTONLY
-	} else {
-		if(profile.vegan) {
-			params.types = 'restaurant';
-			params.keyword = 'vegan';
-		} else {
-			params.types = 'restaurant';
-			params.keyword = 'pita';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);
-		});
+	// } else {
 
-		if(profile.gender === 'f') {
-			params.types = 'bar';
-		} else {
-			params.types = 'bar';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);
-		});
-		if(profile.openmindedness === false) {
-			params.types = 'pharmacy';
-		} else {
-			params.types = 'liquor_store';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);			});
 
-		if(profile.dance) {
-			params.types = 'night_club';
-		} else {
-			params.types = 'bowling_alley';
-		}
-		getFirstResult(params, function(err, result) {
-			if(!err) resultArray.push(result);
-		});
-	}
+	// 	if(profile.vegan) {
+	// 		params.types = 'restaurant';
+	// 		params.keyword = 'vegan';
+	// 	} else {
+	// 		params.types = 'restaurant';
+	// 		params.keyword = 'pita';
+	// 	}
+	// 	getFirstResult(params, function(err, result) {
+	// 		if(!err) resultArray.push(result);
+	// 	});
+
+	// 	if(profile.gender === 'f') {
+	// 		params.types = 'bar';
+	// 	} else {
+	// 		params.types = 'bar';
+	// 	}
+	// 	getFirstResult(params, function(err, result) {
+	// 		if(!err) resultArray.push(result);
+	// 	});
+	// 	if(profile.openmindedness === false) {
+	// 		params.types = 'pharmacy';
+	// 	} else {
+	// 		params.types = 'liquor_store';
+	// 	}
+	// 	getFirstResult(params, function(err, result) {
+	// 		if(!err) resultArray.push(result);			});
+
+	// 	if(profile.dance) {
+	// 		params.types = 'night_club';
+	// 	} else {
+	// 		params.types = 'bowling_alley';
+	// 	}
+	// 	getFirstResult(params, function(err, result) {
+	// 		if(!err) resultArray.push(result);
+	// 	});
+	// }
 
 }
-
-mapProfileToQuery(profile);
+console.log(profile);
+// mapProfileToQuery(profile);
 
 
 app.get('/', function (req, res) {
@@ -281,23 +315,26 @@ app.post('/rest/answers', function (req, res) {
 	// "budget:big"
 
 	var profile = {
-	gender: 'f',
-	openmindedness: true,
-	vegan: false,
-	rich: 5,
-	dance: true,
-	nightonly: false,
-};
+		gender: 'f',
+		openmindedness: true,
+		vegan: false,
+		rich: 5,
+		dance: true,
+		nightonly: false,
+	};
 
-if(answers[0] === 'me:female') profile.gender = 'f'; else profile.gender = 'm';
-if(answers[1] === 'openminded:true') profile.openmindedness = true; else profile.openmindedness = false;
-if(answers[2] === 'food:vegan') profile.vegan = true; else profile.vegan = false;
-if(answers[3] === 'transportation:bus') profile.rich = false; else profile.rich = true;
-if(answers[4] === 'music:clubbing') profile.dance = true; else profile.dance = false;
-if(answers[5] === 'till:dawn') profile.nightonly = true; else profile.nightonly = false;
-
-
-	res.json({err:0});
+	if(answers[0] === 'me:female') profile.gender = 'f'; else profile.gender = 'm';
+	if(answers[2] === 'openminded:true') profile.openmindedness = true; else profile.openmindedness = false;
+	if(answers[3] === 'food:vegan') profile.vegan = true; else profile.vegan = false;
+	if(answers[5] === 'transportation:bus') profile.rich = false; else profile.rich = true;
+	if(answers[6] === 'music:clubbing') profile.dance = true; else profile.dance = false;
+	if(answers[7] === 'start:evening' && answers[8] === 'end:morning') profile.nightonly = true; else profile.nightonly = false;
+	profile.nightonly = false;
+	mapProfileToQuery(profile, function(err, res) {
+		console.log('got here');
+		if(err) return resu.json({err: err});
+		resu.json({results: res});
+	});
 });
 
 

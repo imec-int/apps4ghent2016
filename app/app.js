@@ -32,16 +32,38 @@ var publicConfig = {
 
 var gmAPI = new googlemaps(publicConfig);
 
-// var params = {
-// 	location: "51.040923, 3.727952",
-// 	radius: 2000,
-// 	rankby: 'distance',
-// 	types: 'bar'
-// };
+var params = {
+	location: "51.054486, 3.725298",
+	radius: 2000,
+	rankby: 'distance',
+	// keyword: 'pita'
+	types: 'bar'
+};
+
+var profile = {
+	gender: 'm',
+	orientation: 'f',
+	openmindedness: 5, //0-5
+	fond: 'pita',
+	fitness: 5,
+	bmi: 20,
+	groupsize: 10,
+	budget: 5, //0-5
+	dance: 'y',
+	beerprice: 5,
+	openinghour: 11,
+	pharmacy: 'y'
+}
+
+
 // gmAPI.placeSearch(params, function(err, result) {
 // 	console.log(err);
 // 	console.log(result);
 // });
+
+function mapProfileToQuery(profile) {
+	console.log(profile);
+}
 
 
 app.get('/', function(req, res) {

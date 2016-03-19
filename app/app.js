@@ -66,11 +66,17 @@ function mapProfileToQuery(profile) {
 }
 
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
 	res.render('index', { title: 'Apps 4 Ghent 2016!' });
 });
 
+app.post('/rest/answers', function (req, res) {
+	var answers = req.body;
 
+	console.log('hier zijn de antwoorden matthias, have fun:p', answers);
+
+	res.json({err:0});
+});
 
 
 

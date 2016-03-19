@@ -128,6 +128,10 @@ app.post('/rest/answers', function (req, res) {
 	// "end:morning"     -- aangepast
 	// "end:evening"     -- aangepast
 
+	// new:
+	// "budget:big"
+	// "budget:big"
+
 
 
 	res.json({err:0});

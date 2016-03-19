@@ -58,6 +58,18 @@ var App = function (options) {
 		]);
 
 	    questions.push([
+             {title: "Budget"},
+			{
+				img: "duurbier.png",
+				keyword: "budget:big"
+			},
+			{
+				img: "goedkoopbier.png",
+				keyword: "budget:small"
+			}
+		]);
+
+	    questions.push([
              {title: "transportbudget"},
 			{
 				img: "transport_bus.png",

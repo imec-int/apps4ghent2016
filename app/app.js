@@ -6,13 +6,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var googlemaps = require('googlemaps');
+var key = require('./config').key;
 
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 
 //app.use(favicon(__dirname + '/public/favicon.ico')); // uncomment after placing your favicon in /public
 app.use(logger('dev'));
@@ -21,6 +22,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var publicConfig = {
+	key: key,
+	stagger_time:       1000, // for elevationPath
+	encode_polylines:   false,
+	secure:             true
+};
+
+var gmAPI = new googlemaps(publicConfig);
+
+// var params = {
+// 	location: "51.040923, 3.727952",
+// 	radius: 2000,
+// 	rankby: 'distance',
+// 	types: 'bar'
+// };
+// gmAPI.placeSearch(params, function(err, result) {
+// 	console.log(err);
+// 	console.log(result);
+// });
 
 
 app.get('/', function(req, res) {

@@ -1,7 +1,49 @@
 @import common
 
+
 .content
 	max-width 100%
 	width 900px
 	margin-left auto
 	margin-right auto
+
+	p.title
+		font-size 40px
+		color white
+		margin-top 50px
+		margin-left 50px
+
+	.resultContainer
+		.row.place
+			[class*="col-"]
+				background-color #eee
+				border 1px #ccc solid
+				height 80px
+				line-height 80px
+
+				p.time
+					height 60px
+					font-size 36px
+					margin-top 10px
+					line-height 60px
+					text-align center
+					color #666
+
+				p.icon
+					font-size 40px
+					line-height 70px
+					text-align center
+
+				p.name
+					font-size 30px
+
+		.row.route
+			.dash
+				border-right 1px dashed #777
+
+			[class*="col-"]
+				background-color #fff
+				height 50px
+
+				p
+					line-height 50px

@@ -1,0 +1,55 @@
+doctype html5
+html
+	head
+		meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+		title= title
+		link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,100', rel='stylesheet', type='text/css')
+
+		link(rel='stylesheet', href="/stylesheets/index.css")
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css', integrity='sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r', crossorigin='anonymous')
+
+
+	body
+		.content
+			p.title	Uw vrij gezellig plan in Gent
+			br
+			.resultContainer
+				.row.place
+					.col-md-2
+						p.time 11:00
+					.col-md-1
+						p.icon.glyphicon.glyphicon-glass
+					.col-md-4
+						p.name De Dulle Griet
+					.col-md-4
+						p.extra extra detail
+				.row.route
+					.col-md-1.dash
+					.col-md-2
+						p
+					.col-md-4
+						p 12 min Wandelen
+					.col-md-4
+						p 2.6km (500 cal)
+				.row.place
+					.col-md-2
+						p.time 13:00
+					.col-md-1
+						p.icon.glyphicon.glyphicon-cutlery
+					.col-md-4
+						p.name De superette
+					.col-md-4
+						p.extra extra detail
+
+
+
+
+		script(type='text/javascript', src='//code.jquery.com/jquery.min.js')
+		script(type='text/javascript', src='/vendor/jquery.tmpl.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
+		script(src='http://underscorejs.org/underscore.js')
+		script(src='http://backbonejs.org/backbone.js')
+		script(src='/vendor/backbone-forms.js')
+		script(src='/vendor/backbone-forms-bootstrap3.js')
+		script(type='text/javascript', src='/javascripts/result.js')

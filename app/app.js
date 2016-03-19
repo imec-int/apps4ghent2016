@@ -27,6 +27,10 @@ app.get('/', function(req, res) {
 	res.render('index', { title: 'Apps 4 Ghent 2016!' });
 });
 
+app.get('/result', function(req, res) {
+	res.render('result', { title: 'Apps 4 Ghent 2016!' });
+});
+
 
 
 

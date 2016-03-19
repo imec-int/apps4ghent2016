@@ -10,26 +10,53 @@ var App = function (options) {
 		// vraag 1:
 		questions.push([
 			{
-				img: "test.png",
-				keyword: "ik-ben-man"
+				img: "female.png",
+				keyword: "me:female"
 			},
 			{
-				img: "test.png",
-				keyword: "ik-ben-vrouw"
+				img: "male.png",
+				keyword: "me:male"
 			}
 		]);
 
 		// vraag 2:
 		questions.push([
 			{
-				img: "test.png",
-				keyword: "ik-ben-voor-de-mannen"
+				img: "open.png",
+				keyword: "openminded:true"
 			},
 			{
-				img: "test.png",
-				keyword: "ik-ben-voor-de-vrouwen"
+				img: "closed.png",
+				keyword: "openminded:false"
 			}
 		]);
+
+		// vraag 4:
+		questions.push([
+			{
+				img: "Food-Vegan.png",
+				keyword: "food:vegan"
+			},
+			{
+				img: "Food-Hamburger.png",
+				keyword: "food:hamburger"
+			}
+		]);
+
+		questions.push([
+			{
+				img: "transport_bus.png",
+				keyword: "transportation:bus"
+			},
+			{
+				img: "transport_taxi.png",
+				keyword: "transportation:taxi"
+			}
+		]);
+
+
+
+
 
 		// start vragenreeks:
 		showNextQuestion();
@@ -76,7 +103,7 @@ var App = function (options) {
 
 			// bouw image DOM element from code:
 			var $img = $(document.createElement('img'));
-			$img.attr('src', '/images/' + answer.img);
+			$img.attr('src', '/img/' + answer.img);
 			$img.attr('title', answer.keyword);
 			$img.attr('data-keyword', answer.keyword); // keyword koppelen aan DOM-element om straks terug te kunnen opvragen.
 			$img.addClass('answer-image');

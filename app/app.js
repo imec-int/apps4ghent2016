@@ -75,6 +75,15 @@ app.post('/rest/answers', function (req, res) {
 
 	console.log('hier zijn de antwoorden matthias, have fun:p', answers);
 
+	// bvb:
+
+	// answers = [ 'me:female',
+	//   'openminded:false',
+	//   'food:vegan',
+	//   'transportation:taxi' ]
+
+	// zie /public/javascripts/index.js voor meer opties ;-)
+
 	res.json({err:0});
 });
 

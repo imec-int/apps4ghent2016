@@ -123,7 +123,7 @@ function getFirstResult(params, callback) {
 
 		var stop = {
 			name: firstresult.name,
-			address: firstresult.vicinity,
+			extra: firstresult.vicinity,
 			location: firstresult.geometry.location
 		}
 		params.location = "" + stop.location.lat + ", " + stop.location.lng;
@@ -258,15 +258,6 @@ app.get('/', function (req, res) {
 	res.render('index', { title: 'Apps 4 Ghent 2016!' });
 });
 
-// de antwoorden komen nu hier toe:
-app.post('/', function (req, res) {
-	var answers = JSON.parse(req.body.answersAsJSON);
-	console.log(answers);
-
-	var results = testresults; // array aanpassen!
-
-	res.render('result', { title: 'Apps 4 Ghent 2016!', results: results });
-});
 
 
 app.get('/testresults', function (req, res) {
@@ -277,10 +268,14 @@ app.get('/testresults', function (req, res) {
 
 
 
-app.post('/rest/answers', function (req, res) {
-	var answers = req.body;
+// de antwoorden komen nu hier toe:
+app.post('/', function (req, res) {
+	var answers = JSON.parse(req.body.answersAsJSON);
+	console.log(answers);
 
-	console.log('hier zijn de antwoorden matthias, have fun:p', answers);
+	var results = testresults; // array aanpassen!
+
+
 
 	// bvb:
 
@@ -333,7 +328,9 @@ app.post('/rest/answers', function (req, res) {
 	mapProfileToQuery(profile, function(err, res) {
 		console.log('got here');
 		if(err) return resu.json({err: err});
-		resu.json({results: res});
+
+		results = res;
+		res.render('result', { title: 'Apps 4 Ghent 2016!', results: results });
 	});
 });
 

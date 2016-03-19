@@ -30,6 +30,51 @@ var publicConfig = {
 	secure:             true
 };
 
+var testresults = [
+	{
+		id: 0,
+		time: "17:00",
+		type: "cafe",
+		name: "De Dulle Griet",
+		extra: "Vrijdagmarkt 50",
+		location: {
+			lon: 1.1111,
+			lat: 2.2323424
+		},
+		travelTonext: {
+			time: "12min",
+			distance: "2.8km"
+		}
+	},
+	{
+		id: 1,
+		time: "19:00",
+		type: "restaurant",
+		name: "Pizza Rustica",
+		extra: "Sint-Pietersnieuwstraat 154",
+		location: {
+			lon: 1.1111,
+			lat: 2.2323424
+		},
+		travelTonext: {
+			time: "20min",
+			distance: "4.8km"
+		}
+	},
+	{
+		id: 2,
+		time: "22:00",
+		type: "cafe",
+		name: "Bar des amis",
+		extra: "Vlasmarkt 5",
+		location: {
+			lon: 1.1111,
+			lat: 2.2323424
+		},
+		travelTonext: null
+	}
+];
+
 var gmAPI = new googlemaps(publicConfig);
 
 
@@ -184,75 +229,16 @@ app.post('/', function (req, res) {
 	var answers = JSON.parse(req.body.answersAsJSON);
 	console.log(answers);
 
-	var results = [
-		{
-			id: 0,
-			time: "17:00",
-			type: "cafe",
-			name: "Geen Resultaten",
-			extra: "Vrijdagmarkt 50",
-			location: {
-				lon: 1.1111,
-				lat: 2.2323424
-			},
-			travelTonext: {
-				time: "12min",
-				distance: "2.8km"
-			}
-		}
-	]; //opvullen!!!
+	var results = testresults; // array aanpassen!
 
 	res.render('result', { title: 'Apps 4 Ghent 2016!', results: results });
 });
 
 
 app.get('/testresults', function (req, res) {
-	var results = [
-		{
-			id: 0,
-			time: "17:00",
-			type: "cafe",
-			name: "De Dulle Griet",
-			extra: "Vrijdagmarkt 50",
-			location: {
-				lon: 1.1111,
-				lat: 2.2323424
-			},
-			travelTonext: {
-				time: "12min",
-				distance: "2.8km"
-			}
-		},
-		{
-			id: 1,
-			time: "19:00",
-			type: "restaurant",
-			name: "Pizza Rustica",
-			extra: "Sint-Pietersnieuwstraat 154",
-			location: {
-				lon: 1.1111,
-				lat: 2.2323424
-			},
-			travelTonext: {
-				time: "20min",
-				distance: "4.8km"
-			}
-		},
-		{
-			id: 2,
-			time: "22:00",
-			type: "cafe",
-			name: "Bar des amis",
-			extra: "Vlasmarkt 5",
-			location: {
-				lon: 1.1111,
-				lat: 2.2323424
-			},
-			travelTonext: null
-		}
-	];
 
-	res.render('result', { title: 'Apps 4 Ghent 2016!', results: results });
+
+	res.render('result', { title: 'Apps 4 Ghent 2016!', results: testresults });
 });
 
 

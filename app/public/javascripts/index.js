@@ -82,14 +82,14 @@ var App = function (options) {
 		]);
 
 	    questions.push([
-            {title: "club or concert"},
+            {title: "Clubbing or Bowling"},
 			{
 				img: "DJing.png",
 				keyword: "music:clubbing"
 			},
 			{
-				img: "rock.png",
-				keyword: "music:guitar"
+				img: "bowling.png",
+				keyword: "music:bowling"
 			}
 		]);
 

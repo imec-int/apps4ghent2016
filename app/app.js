@@ -84,6 +84,23 @@ app.post('/rest/answers', function (req, res) {
 
 	// zie /public/javascripts/index.js voor meer opties ;-)
 
+	// mogelijkheden:
+	//
+	// "me:female"
+	// "me:male"
+	// "openminded:true"
+	// "openminded:false"
+	// "food:vegan"
+	// "food:hamburger"
+	// "transportation:bus"
+	// "transportation:taxi"
+	// "music:gitar"
+	// "music:clubbing"
+	// "till:dusk"
+	// "till:dawn"
+
+
+
 	res.json({err:0});
 });
 

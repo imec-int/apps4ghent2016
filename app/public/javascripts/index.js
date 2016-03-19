@@ -8,7 +8,19 @@ var App = function (options) {
 		console.log("init");
 
 		// vraag 1:
-		questions.push([
+	    questions.push([
+                {title: "ik ben"},
+			{
+				img: "female.png",
+				keyword: "me:female"
+			},
+			{
+				img: "male.png",
+				keyword: "me:male"
+			}
+		]);
+            questions.push([
+                {title: "ik ben voor de"},
 			{
 				img: "female.png",
 				keyword: "me:female"
@@ -20,7 +32,8 @@ var App = function (options) {
 		]);
 
 		// vraag 2:
-		questions.push([
+	    questions.push([
+                {title: "openminded"},
 			{
 				img: "openmind.png", //open.png voor sharon stone
 				keyword: "openminded:true"
@@ -32,7 +45,8 @@ var App = function (options) {
 		]);
 
 		// vraag 3:
-		questions.push([
+	    questions.push([
+                {title: "fond leggen"},
 			{
 				img: "Food-Vegan.png",
 				keyword: "food:vegan"
@@ -43,7 +57,8 @@ var App = function (options) {
 			}
 		]);
 
-		questions.push([
+	    questions.push([
+                {title: "transportbudget"},
 			{
 				img: "transport_bus.png",
 				keyword: "transportation:bus"
@@ -54,7 +69,8 @@ var App = function (options) {
 			}
 		]);
 
-		questions.push([
+	    questions.push([
+                {title: "club or concert"},
 			{
 				img: "rock.png",
 				keyword: "music:gitar"
@@ -65,7 +81,19 @@ var App = function (options) {
 			}
 		]);
 
-		questions.push([
+	    questions.push([
+                {title: "wanneer vertrekken we"},
+			{
+				img: "moon.png",
+				keyword: "till:dusk"
+			},
+			{
+				img: "sun.png",
+				keyword: "till:dawn"
+			}
+		]);
+	    questions.push([
+                {title: "wanneer keren we terug"},
 			{
 				img: "moon.png",
 				keyword: "till:dusk"
@@ -162,4 +190,3 @@ $(function(){
 	var app = new App();
 	app.init();
 });
-

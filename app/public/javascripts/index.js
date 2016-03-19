@@ -9,7 +9,7 @@ var App = function (options) {
 
 		// vraag 1:
 	    questions.push([
-            {title: "ik ben"},
+            {title: "Ik ben..."},
 			{
 				img: "female.png",
 				keyword: "me:female"
@@ -20,7 +20,7 @@ var App = function (options) {
 			}
 		]);
             questions.push([
-            {title: "ik ben voor de"},
+            {title: "Ik ben voor de..."},
 			{
 				img: "female.png",
 				keyword: "interest:female"
@@ -33,7 +33,7 @@ var App = function (options) {
 
 		// vraag 2:
 	    questions.push([
-            {title: "openminded"},
+            {title: "Open minded of ..."},
 			{
 				img: "openmind.png", //open.png voor sharon stone
 				keyword: "openminded:true"
@@ -46,7 +46,7 @@ var App = function (options) {
 
 		// vraag 3:
 	    questions.push([
-            {title: "fond leggen"},
+            {title: "Ik leg mijn fond met ..."},
 			{
 				img: "Food-Vegan.png",
 				keyword: "food:vegan"
@@ -58,7 +58,7 @@ var App = function (options) {
 		]);
 
 	    questions.push([
-             {title: "Budget"},
+             {title: "Onze portefeuille is ..."},
 			{
 				img: "duurbier.png",
 				keyword: "budget:big"
@@ -70,7 +70,7 @@ var App = function (options) {
 		]);
 
 	    questions.push([
-             {title: "transportbudget"},
+            {title: "We rijden met ..."},
 			{
 				img: "transport_bus.png",
 				keyword: "transportation:bus"
@@ -82,7 +82,7 @@ var App = function (options) {
 		]);
 
 	    questions.push([
-            {title: "Clubbing or Bowling"},
+            {title: "Als activiteit kiezen we ..."},
 			{
 				img: "DJing.png",
 				keyword: "music:clubbing"
@@ -94,7 +94,7 @@ var App = function (options) {
 		]);
 
 	    questions.push([
-            {title: "wanneer vertrekken we"},
+            {title: "We vertrekken in de ..."},
 			{
 				img: "sun.png",
 				keyword: "start:morning"
@@ -105,7 +105,7 @@ var App = function (options) {
 			}
 		]);
 	    questions.push([
-            {title: "wanneer keren we terug"},
+            {title: "We gaan slapen in de ..."},
 			{
 				img: "moon.png",
 				keyword: "end:evening"

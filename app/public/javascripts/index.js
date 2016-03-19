@@ -1,68 +1,103 @@
-var App = function (options){
+var App = function (options) {
+
+	var questionIndex = -1;
+	var questions = [];
+	var answers = [];
 
 	var init = function (){
 		console.log("init");
 
-		buildForm();
+		// vraag 1:
+		questions.push([
+			{
+				img: "test.png",
+				keyword: "ik-ben-man"
+			},
+			{
+				img: "test.png",
+				keyword: "ik-ben-vrouw"
+			}
+		]);
+
+		// vraag 2:
+		questions.push([
+			{
+				img: "test.png",
+				keyword: "ik-ben-voor-de-mannen"
+			},
+			{
+				img: "test.png",
+				keyword: "ik-ben-voor-de-vrouwen"
+			}
+		]);
+
+		// start vragenreeks:
+		showNextQuestion();
+	};
+
+	var showNextQuestion = function () {
+		questionIndex++;
+		$('.questioncontainer').empty();
+
+
+
+		if(questionIndex >= questions.length) {
+			// was laatste vraag, overgaan tot POSTen van data:
+
+			console.log('last question, POSTing');
+
+			$.ajax({
+				url: '/rest/answers',
+				type: 'POST',
+				data: JSON.stringify(answers),
+				contentType: 'application/json; charset=utf-8',
+				dataType: 'json',
+				async: false,
+				success: function (res) {
+					if(res.err) alert(res.err);
+					console.log(res);
+				}
+			});
+
+			return;
+		}
+
+		// gewoon volgnede vraag tonen:
+		var currentQuestion = questions[questionIndex];
+		showQuestion(currentQuestion);
 	};
 
 
+	var showQuestion = function (question) {
+		// in de question zitten 2 of meerdere anwers:
 
-	var buildForm = function () {
-		// form bouwen met https://github.com/powmedia/backbone-forms
-		// zonder gebruik te maken van alle backbone-features:
+		for (var i = 0; i < question.length; i++) {
+			var answer = question[i];
 
-		var someForm = new Backbone.Form({
-			schema: {
-				naam: {
-					validators: ['required']
-				},
-				voornaam: {
-					validators: ['required']
-				},
-				geboortedatum: {
-					title: 'Geboortedatum',
-					type: 'Date',
-				},
-				adres: {
-					editorAttrs: {placeholder: "Straat + huisnummer (+ busnummer)"},
-					validators: ['required']
-				},
-				postcode: {
-					validators: ['required']
-				},
-				gemeente: {
-					validators: ['required']
-				},
-				land: {
-					type: 'Select',
-					options: countries
-				}
-			},
-			data: {
-				land: 'België'
-			},
-			submitButton: "Bereken voor mij de ultieme vrijgezellenroute!"
-		});
+			// bouw image DOM element from code:
+			var $img = $(document.createElement('img'));
+			$img.attr('src', '/images/' + answer.img);
+			$img.attr('title', answer.keyword);
+			$img.attr('data-keyword', answer.keyword); // keyword koppelen aan DOM-element om straks terug te kunnen opvragen.
+			$img.addClass('answer-image');
 
-		$('.formcontainer').empty().append(someForm.render().el);
+			$img.on('click', handleImageClick);
+
+			$('.questioncontainer').append($img);
+		};
+	};
 
 
-		someForm.on('submit', function (event) {
-			event.preventDefault(); // nie posten!
+	var handleImageClick = function (event) {
+		var $img = $(event.target);
+		if ($img.attr('data-keyword') != null) {
+			var keyword = $img.attr('data-keyword'); // keyword zit in de attrbutes
 
-			var errors = someForm.validate();
-			if(errors) return;
+			answers.push(keyword); // gewoon keywords toevoegen als answers:
 
-
-			var data = someForm.getValue();
-			data.geboortedatum = data.geboortedatum.getTime();
-			$.put('/rest/sendata', data, function (data) {
-				if(data.err) { return console.log(data.err); }
-				console.log('data successfully posted to server!')
-			});
-		});
-	}
+			showNextQuestion();
+		}
+	};
 
 	return {
 		init: init

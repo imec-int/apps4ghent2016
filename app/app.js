@@ -113,16 +113,20 @@ app.post('/rest/answers', function (req, res) {
 	//
 	// "me:female"
 	// "me:male"
+	// "interest:male"    -- new
+	// "interest:female"  -- new
 	// "openminded:true"
 	// "openminded:false"
 	// "food:vegan"
 	// "food:hamburger"
 	// "transportation:bus"
 	// "transportation:taxi"
-	// "music:gitar"
+	// "music:guitar"    -- aangepast
 	// "music:clubbing"
-	// "till:dusk"
-	// "till:dawn"
+	// "start:morning"   -- new
+	// "start:evening"   -- new
+	// "end:morning"     -- aangepast
+	// "end:evening"     -- aangepast
 
 
 

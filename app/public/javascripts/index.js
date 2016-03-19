@@ -9,7 +9,7 @@ var App = function (options) {
 
 		// vraag 1:
 	    questions.push([
-                {title: "ik ben"},
+            {title: "ik ben"},
 			{
 				img: "female.png",
 				keyword: "me:female"
@@ -20,20 +20,20 @@ var App = function (options) {
 			}
 		]);
             questions.push([
-                {title: "ik ben voor de"},
+            {title: "ik ben voor de"},
 			{
 				img: "female.png",
-				keyword: "me:female"
+				keyword: "interest:female"
 			},
 			{
 				img: "male.png",
-				keyword: "me:male"
+				keyword: "interest:male"
 			}
 		]);
 
 		// vraag 2:
 	    questions.push([
-                {title: "openminded"},
+            {title: "openminded"},
 			{
 				img: "openmind.png", //open.png voor sharon stone
 				keyword: "openminded:true"
@@ -46,7 +46,7 @@ var App = function (options) {
 
 		// vraag 3:
 	    questions.push([
-                {title: "fond leggen"},
+            {title: "fond leggen"},
 			{
 				img: "Food-Vegan.png",
 				keyword: "food:vegan"
@@ -58,7 +58,7 @@ var App = function (options) {
 		]);
 
 	    questions.push([
-                {title: "transportbudget"},
+             {title: "transportbudget"},
 			{
 				img: "transport_bus.png",
 				keyword: "transportation:bus"
@@ -70,37 +70,37 @@ var App = function (options) {
 		]);
 
 	    questions.push([
-                {title: "club or concert"},
-			{
-				img: "rock.png",
-				keyword: "music:gitar"
-			},
+            {title: "club or concert"},
 			{
 				img: "DJing.png",
 				keyword: "music:clubbing"
+			},
+			{
+				img: "rock.png",
+				keyword: "music:guitar"
 			}
 		]);
 
 	    questions.push([
-                {title: "wanneer vertrekken we"},
-			{
-				img: "moon.png",
-				keyword: "till:dusk"
-			},
+            {title: "wanneer vertrekken we"},
 			{
 				img: "sun.png",
-				keyword: "till:dawn"
+				keyword: "start:morning"
+			},
+			{
+				img: "moon.png",
+				keyword: "start:evening"
 			}
 		]);
 	    questions.push([
-                {title: "wanneer keren we terug"},
+            {title: "wanneer keren we terug"},
 			{
 				img: "moon.png",
-				keyword: "till:dusk"
+				keyword: "end:evening"
 			},
 			{
 				img: "sun.png",
-				keyword: "till:dawn"
+				keyword: "end:morning"
 			}
 		]);
 
@@ -112,7 +112,7 @@ var App = function (options) {
 	var showNextQuestion = function () {
 		questionIndex++;
 		$('.questioncontainer').empty();
-
+		$('.question-title').text("");
 
 
 		if(questionIndex >= questions.length) {
@@ -138,20 +138,32 @@ var App = function (options) {
 
 	var showQuestion = function (question) {
 		// in de question zitten 2 of meerdere anwers:
+		// maar er kan ook een title inzitten tegenwoordig :-)
 
 		for (var i = 0; i < question.length; i++) {
-			var answer = question[i];
 
-			// bouw image DOM element from code:
-			var $img = $(document.createElement('img'));
-			$img.attr('src', '/img/' + answer.img);
-			$img.attr('title', answer.keyword);
-			$img.attr('data-keyword', answer.keyword); // keyword koppelen aan DOM-element om straks terug te kunnen opvragen.
-			$img.addClass('answer-image');
+			var questionpart = question[i];
 
-			$img.on('click', handleImageClick);
+			// checken of questionpart een antwoord is of een obectje is met de titel
+			if(questionpart.title) {
+				$('.question-title').text(questionpart.title);
+			}
 
-			$('.questioncontainer').append($img);
+			if(questionpart.img) {
+				var answer = question[i];
+
+				// bouw image DOM element from code:
+				var $img = $(document.createElement('img'));
+				$img.attr('src', '/img/' + answer.img);
+				$img.attr('title', answer.keyword);
+				$img.attr('data-keyword', answer.keyword); // keyword koppelen aan DOM-element om straks terug te kunnen opvragen.
+				$img.addClass('answer-image');
+
+				$img.on('click', handleImageClick);
+
+				$('.questioncontainer').append($img);
+			}
+
 		};
 	};
 
